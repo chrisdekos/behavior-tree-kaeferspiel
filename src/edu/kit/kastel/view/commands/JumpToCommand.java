@@ -42,7 +42,7 @@ public class JumpToCommand implements Command<Game> {
             if (!handle.getLadybug(ladybugID).getIfActive()) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
             }
-            if (handle.getLadybug(ladybugID).getBehaviorTree().hasNode(nodeID)) {
+            if (!handle.getLadybug(ladybugID).getBehaviorTree().hasNode(nodeID)) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_NODE_ERROR);
             }
 
