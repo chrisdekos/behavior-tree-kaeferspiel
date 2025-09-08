@@ -42,8 +42,8 @@ public final class TraceEntriesPrinter {
         int col = Integer.parseInt(coordinates[0]);
         int row = Integer.parseInt(coordinates[1]);
 
-        String viewCoordinates = PrintHelpers.toViewPosition(new Position(col, row));
-        String newNodeType = parts[0] + COORDINATES_SEPARATOR + viewCoordinates.trim();
+        String viewCoordinates = PrintHelpers.toViewCoordinates(new Position(col, row));
+        String newNodeType = parts[0] + COORDINATES_SEPARATOR + viewCoordinates;
         return new TraceEntry(entry.ladybugId(), entry.nodeId(), newNodeType, entry.event()).toString();
     }
 }

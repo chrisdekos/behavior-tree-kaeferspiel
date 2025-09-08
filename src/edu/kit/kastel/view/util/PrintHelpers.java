@@ -23,6 +23,7 @@ public final class PrintHelpers {
     private static final char BORDER_HORIZONTAL = '-';
     private static final char BORDER_VERTICAL = '|';
     private static final int BORDER_EXTRA_COLUMNS = 2;
+    private static final String VIEW_COORDINATES_FORMAT = "%d,%d";
     private static final String VIEW_POSITION_FORMAT = "(%d, %d)";
     private static final int VIEW_INDEX_SHIFT = 1;
 
@@ -57,6 +58,17 @@ public final class PrintHelpers {
      */
     public static String toViewPosition(Position position) {
         return String.format(VIEW_POSITION_FORMAT, position.column() + VIEW_INDEX_SHIFT,
+                position.row() + VIEW_INDEX_SHIFT);
+    }
+
+    /**
+     * Converts a {@link Position} into a coordinate string using view coordinates.
+     * The internal indices are converted to match the user-facing coordinate system.
+     * @param position the position to convert
+     * @return the formatted coordinate string
+     */
+    public static String toViewCoordinates(Position position) {
+        return String.format(VIEW_COORDINATES_FORMAT, position.column() + VIEW_INDEX_SHIFT,
                 position.row() + VIEW_INDEX_SHIFT);
     }
 
