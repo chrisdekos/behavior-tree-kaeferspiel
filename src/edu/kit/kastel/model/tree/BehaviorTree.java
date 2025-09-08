@@ -137,6 +137,10 @@ public class BehaviorTree {
         }
     }
 
+    public String getRootID() {
+        return root.getId();
+    }
+
     /**
      * Adds a sibling node next to an existing node.
      * @param parent     the parent of the existing node
