@@ -12,6 +12,7 @@ import edu.kit.kastel.view.Result;
  */
 public class JumpToCommand implements Command<Game> {
     private static final String COULD_NOT_FIND_LADYBUG_ERROR = "ladybug could not be found";
+    private static final String COULD_NOT_FIND_NODE_ERROR = "ladybug could not be found";
 
     private final int ladybugID;
     private final String nodeID;
@@ -40,6 +41,9 @@ public class JumpToCommand implements Command<Game> {
             }
             if (!handle.getLadybug(ladybugID).getIfActive()) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
+            }
+            if (handle.getLadybug(ladybugID).getBehaviorTree().hasNode(nodeID)) {
+                throw new InvalidArgumentException(COULD_NOT_FIND_NODE_ERROR);
             }
 
         } catch (AllActionsEnabledException | InvalidArgumentException e) {

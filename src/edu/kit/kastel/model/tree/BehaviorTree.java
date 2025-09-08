@@ -157,4 +157,18 @@ public class BehaviorTree {
     public Node findNodeByID(String id) {
         return nodesByID.get(id);
     }
+
+    /**
+     * Checks if the node from the given id exists in the tree.
+     * @param nodeID the given id
+     * @return true if it exists, false otherwise
+     */
+    public boolean hasNode(String nodeID) {
+        for (Node node: nodesByID.values()) {
+            if (node.getId().equals(nodeID)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
