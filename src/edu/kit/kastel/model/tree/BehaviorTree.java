@@ -89,6 +89,7 @@ public class BehaviorTree {
         if (parent == root) {
             for (Node child : root.getChildren()) {
                 if (child == target) {
+                    child.setNodeStatus(NodeStatus.ENTRY);
                     break;
                 }
                 child.setNodeStatus(simulateStatusForSkipped(root));
