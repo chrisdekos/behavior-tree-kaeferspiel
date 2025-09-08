@@ -13,6 +13,7 @@ import edu.kit.kastel.view.Result;
  */
 public class AddSiblingCommand implements Command<Game> {
     private static final String ROOT_CAN_NOT_HAVE_A_SIBLING_ERROR = "root can not have a sibling";
+    private static final String COULD_NOT_FIND_LADYBUG_ERROR = "ladybug could not be found";
     private final int ladybugID;
     private final String existingNodeID;
     private final String newNode;
@@ -39,6 +40,9 @@ public class AddSiblingCommand implements Command<Game> {
         try {
             if (!handle.allActionsEnabled()) {
                 throw new AllActionsEnabledException();
+            }
+            if (!handle.getLadybug(ladybugID).getIfActive()) {
+                throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
             }
             if (existingNodeID.equals(handle.getLadybug(ladybugID).getBehaviorTree().getRootID())) {
                 throw new InvalidArgumentException(ROOT_CAN_NOT_HAVE_A_SIBLING_ERROR);
