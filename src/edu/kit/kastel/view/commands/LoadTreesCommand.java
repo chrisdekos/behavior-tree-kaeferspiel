@@ -37,7 +37,6 @@ public class LoadTreesCommand implements Command<Game>  {
      */
     @Override
     public Result execute(Game handle) {
-        System.out.println(PrintHelpers.prepareVerbatimPrint(inputLines));
         try {
             if (!handle.isBoardLoaded()) {
                 throw new BoardNotLoadedException();
@@ -46,6 +45,6 @@ public class LoadTreesCommand implements Command<Game>  {
         } catch (TreeParserException | BoardNotLoadedException e) {
             return Result.error(e.getMessage());
         }
-        return Result.success();
+        return Result.success(PrintHelpers.prepareVerbatimPrint(inputLines));
     }
 }
