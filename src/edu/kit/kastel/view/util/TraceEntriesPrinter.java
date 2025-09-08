@@ -38,12 +38,15 @@ public final class TraceEntriesPrinter {
 
     private static String formatWithCoordinates(TraceEntry entry) {
         String[] parts = entry.nodeType().split(COORDINATES_SEPARATOR);
-        String[] coordinates = parts[1].split(COORDINATES_SPLITTER);
-        int col = Integer.parseInt(coordinates[0]);
-        int row = Integer.parseInt(coordinates[1]);
+        StringBuilder newNodeType = new StringBuilder(parts[0]);
 
-        String viewCoordinates = PrintHelpers.toViewCoordinates(new Position(col, row));
-        String newNodeType = parts[0] + COORDINATES_SEPARATOR + viewCoordinates;
-        return new TraceEntry(entry.ladybugId(), entry.nodeId(), newNodeType, entry.event()).toString();
+        for (int i = 1; i < parts.length; i++) {
+            String[] coordinates = parts[i].split(COORDINATES_SPLITTER);
+            int col = Integer.parseInt(coordinates[0]);
+            int row = Integer.parseInt(coordinates[1]);
+            String viewCoordinates = PrintHelpers.toViewCoordinates(new Position(col, row));
+            newNodeType.append(COORDINATES_SEPARATOR).append(viewCoordinates);
+        }
+        return new TraceEntry(entry.ladybugId(), entry.nodeId(), newNodeType.toString(), entry.event()).toString();
     }
 }
