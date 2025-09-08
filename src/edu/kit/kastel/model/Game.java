@@ -29,6 +29,7 @@ public class Game {
     private final List<Ladybug> ladybugs = new ArrayList<>();
 
     private Board board;
+    private Board initialBoard;
     private final BoardParser boardParser;
     private final TreeParser treeParser;
     private boolean boardLoaded;
@@ -52,18 +53,22 @@ public class Game {
 
     /**
      * Loads a board from its textual representation and initializes ladybugs.
+     * It saves a second board instance, in order to reset the board later on, in case trees are loaded again.
      * @param lines the lines representing the board
      * @throws BoardParserException if the board could not be parsed
      */
     public void loadBoard(List<String> lines) throws BoardParserException {
         ladybugs.clear();
-        setBoard(boardParser.parseBoard(lines, ladybugs));
+        Board parsedBoard = boardParser.parseBoard(lines, ladybugs);
+        setBoard(parsedBoard);
+        initialBoard = parsedBoard;
         setBoardLoaded();
         setTreesLoaded(false);
     }
 
     /**
      * Loads behavior trees and assigns them to the ladybugs.
+     * It sets the board to its initial state.
      * @param treeFiles the textual tree descriptions
      * @throws TreeParserException if a tree cannot be parsed
      */
@@ -74,6 +79,7 @@ public class Game {
             ladybug.setBehaviorTree(behaviorTrees.get(i));
             ladybug.setActive(true);
         }
+        setBoard(initialBoard);
         setTreesLoaded(true);
     }
 
