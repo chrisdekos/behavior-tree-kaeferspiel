@@ -87,24 +87,33 @@ public abstract class CompositeNode extends Node {
 
         ensureEntry(tickContext);
         for (Node child : children) {
+            NodeStatus preStatus = child.getNodeStatus();
+            if (preStatus == breakOn) {
+                setNodeStatus(preStatus);
+                logExit(tickContext, preStatus);
+                return preStatus;
+            }
+
             if (child.getNodeStatus().isFinished()) {
                 continue;
             }
+
             if (child.getNodeType().isAction()) {
                 tickContext.getLadybug().getBehaviorTree().setCurrentNode(child);
                 tickContext.requestStop();
                 return NodeStatus.RUNNING;
             }
+
             child.tick(tickContext);
             if (tickContext.isStopRequested()) {
                 return NodeStatus.RUNNING;
             }
 
-            NodeStatus status = child.getNodeStatus();
-            if (status == breakOn) {
-                setNodeStatus(status);
-                logExit(tickContext, status);
-                return status;
+            NodeStatus postStatus = child.getNodeStatus();
+            if (postStatus == breakOn) {
+                setNodeStatus(postStatus);
+                logExit(tickContext, postStatus);
+                return postStatus;
             }
         }
         setNodeStatus(defaultIfNoBreak);
