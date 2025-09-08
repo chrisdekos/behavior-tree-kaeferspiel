@@ -137,6 +137,10 @@ public class BehaviorTree {
         }
     }
 
+    /**
+     * Gets the id from the root of this tree.
+     * @return the root id
+     */
     public String getRootID() {
         return root.getId();
     }
