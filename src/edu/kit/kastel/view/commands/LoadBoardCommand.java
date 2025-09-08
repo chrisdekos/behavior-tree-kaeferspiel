@@ -36,11 +36,12 @@ public class LoadBoardCommand implements Command<Game> {
      */
     @Override
     public Result execute(Game handle) {
+        System.out.println(PrintHelpers.prepareVerbatimPrint(inputLines));
         try {
             handle.loadBoard(inputLines);
         } catch (BoardParserException e) {
             return Result.error(e.getMessage());
         }
-        return Result.success(PrintHelpers.prepareVerbatimPrint(inputLines));
+        return Result.success();
     }
 }
