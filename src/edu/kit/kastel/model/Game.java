@@ -194,6 +194,7 @@ public class Game {
     }
 
     private void saveInitialLadybugs() {
+        initialLadybugs.clear();
         for (Ladybug ladybug : ladybugs) {
             this.initialLadybugs.add(ladybug.copy());
         }
