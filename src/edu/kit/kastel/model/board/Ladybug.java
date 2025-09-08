@@ -225,6 +225,17 @@ public class Ladybug {
         return this.isActive;
     }
 
+
+    /**
+     * Creates a full copy of this ladybug with the same id, position and direction.
+     * @return a new identical Ladybug instance
+     */
+    public Ladybug copy() {
+        return new Ladybug(this.id, this.position, this.direction);
+    }
+
+
+
     /**
      * Sets whether the ladybug is active.
      * @param value true to activate, false to deactivate

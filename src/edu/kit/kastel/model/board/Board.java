@@ -125,6 +125,19 @@ public class Board {
     }
 
     /**
+     * Creates a deep copy of this board.
+     * @return a new Board with the same cell layout
+     */
+    public Board copy() {
+        CellType[][] copyCells = new CellType[board.length][board[FIRST_ROW].length];
+        for (int row = 0; row < board.length; row++) {
+            copyCells[row] = board[row].clone();
+        }
+        return new Board(copyCells);
+    }
+
+
+    /**
      * Returns the number of rows of this board.
      * @return row count
      */

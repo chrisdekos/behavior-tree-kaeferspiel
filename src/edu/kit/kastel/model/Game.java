@@ -26,8 +26,8 @@ import java.util.Collections;
 public class Game {
 
     private static final int ADJUST_INDEX_NUMBER = 1;
-    private final List<Ladybug> ladybugs = new ArrayList<>();
-
+    private final List<Ladybug> ladybugs;
+    private final List<Ladybug> initialLadybugs;
     private Board board;
     private Board initialBoard;
     private final BoardParser boardParser;
@@ -41,6 +41,8 @@ public class Game {
     public Game() {
         this.boardParser = new BoardParser();
         this.treeParser = new TreeParser();
+        ladybugs = new ArrayList<>();
+        initialLadybugs = new ArrayList<>();
     }
 
     /**
@@ -53,7 +55,8 @@ public class Game {
 
     /**
      * Loads a board from its textual representation and initializes ladybugs.
-     * It saves a second board instance, in order to reset the board later on, in case trees are loaded again.
+     * It copies board in his initial state and  ladybugs in their initial state,
+     * in order to reset them later on, in case trees are loaded again
      * @param lines the lines representing the board
      * @throws BoardParserException if the board could not be parsed
      */
@@ -61,9 +64,14 @@ public class Game {
         ladybugs.clear();
         Board parsedBoard = boardParser.parseBoard(lines, ladybugs);
         setBoard(parsedBoard);
-        initialBoard = parsedBoard;
+
+        initialBoard = parsedBoard.copy();
+        saveInitialLadybugs();
+
         setBoardLoaded();
         setTreesLoaded(false);
+
+
     }
 
     /**
@@ -73,13 +81,13 @@ public class Game {
      * @throws TreeParserException if a tree cannot be parsed
      */
     public void loadTrees(List<String> treeFiles) throws TreeParserException {
+        resetBoardAndLadybugs();
         List<BehaviorTree> behaviorTrees = treeParser.parse(treeFiles, ladybugs);
         for (int i = 0; i < behaviorTrees.size(); i++) {
             Ladybug ladybug = ladybugs.get(i);
             ladybug.setBehaviorTree(behaviorTrees.get(i));
             ladybug.setActive(true);
         }
-        setBoard(initialBoard);
         setTreesLoaded(true);
     }
 
@@ -174,6 +182,23 @@ public class Game {
     private boolean areTreesLoaded() {
         return treesLoaded;
     }
+
+
+    private void resetBoardAndLadybugs() {
+        this.board = initialBoard.copy();
+
+        ladybugs.clear();
+        for (Ladybug ladybug : initialLadybugs) {
+            ladybugs.add(ladybug.copy());
+        }
+    }
+
+    private void saveInitialLadybugs() {
+        for (Ladybug ladybug : ladybugs) {
+            this.initialLadybugs.add(ladybug.copy());
+        }
+    }
+
 
     private void setBoardLoaded() {
         boardLoaded = true;
