@@ -224,4 +224,18 @@ public class Game {
     public boolean allActionsEnabled() {
         return areTreesLoaded() && isBoardLoaded();
     }
+
+    /**
+     * Gets the number of active ladybugs.
+     * @return the count of ladybugs
+     */
+    public int getLadybugsSize() {
+        int count = 0;
+        for (Ladybug ladybug : ladybugs) {
+            if (ladybug.getIfActive()) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

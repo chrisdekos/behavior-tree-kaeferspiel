@@ -38,6 +38,9 @@ public class HeadCommand implements Command<Game> {
             if (!handle.getLadybug(ladybugID).getIfActive()) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
             }
+            if (handle.getLadybug(ladybugID).getId() > handle.getLadybugsSize()) {
+                throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
+            }
         } catch (AllActionsEnabledException | InvalidArgumentException e) {
             return Result.error(e.getMessage());
         }
