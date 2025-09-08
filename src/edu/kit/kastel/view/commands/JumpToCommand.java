@@ -38,13 +38,14 @@ public class JumpToCommand implements Command<Game> {
             if (!handle.allActionsEnabled()) {
                 throw new AllActionsEnabledException();
             }
-            if (handle.getLadybug(ladybugID).getIfActive()) {
+            if (!handle.getLadybug(ladybugID).getIfActive()) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
             }
-            handle.jumpTo(ladybugID, nodeID);
-            return Result.success();
+
         } catch (AllActionsEnabledException | InvalidArgumentException e) {
             return Result.error(e.getMessage());
         }
+        handle.jumpTo(ladybugID, nodeID);
+        return Result.success();
     }
 }
