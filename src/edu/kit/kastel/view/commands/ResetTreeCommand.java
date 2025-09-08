@@ -33,7 +33,7 @@ public class ResetTreeCommand implements Command<Game> {
             if (!handle.allActionsEnabled()) {
                 throw new AllActionsEnabledException();
             }
-            if (handle.getLadybug(ladybugID).getIfActive()) {
+            if (!handle.getLadybug(ladybugID).getIfActive()) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
             }
         } catch (AllActionsEnabledException | InvalidArgumentException e) {
