@@ -171,7 +171,7 @@ public final class TreeParser {
         if (inTree) {
             behaviorTrees.add(createCurrentTree());
         }
-
+        treeCount = 0;
         return behaviorTrees;
     }
 
