@@ -12,6 +12,7 @@ import edu.kit.kastel.model.board.Position;
  * @author ujsap
  */
 public class ExistsPathBetweenNode extends ConditionNode {
+    private static final String POSITION_FORMAT = " %d,%d";
     private final Position goal;
     private final Position start;
 
@@ -40,4 +41,11 @@ public class ExistsPathBetweenNode extends ConditionNode {
                 ? NodeStatus.SUCCESS
                 : NodeStatus.FAILURE;
     }
+
+    @Override
+    public String getSpecificType() {
+        return super.getSpecificType() + POSITION_FORMAT.formatted(start.column(), start.row())
+                + POSITION_FORMAT.formatted(goal.column(), goal.row());
+    }
+
 }
