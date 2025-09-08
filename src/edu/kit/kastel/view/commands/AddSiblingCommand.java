@@ -15,7 +15,6 @@ public class AddSiblingCommand implements Command<Game> {
     private static final String ROOT_CAN_NOT_HAVE_A_SIBLING_ERROR = "root can not have a sibling";
     private static final String COULD_NOT_FIND_LADYBUG_ERROR = "ladybug could not be found";
     private static final String COULD_NOT_FIND_NODE_ERROR = "ladybug could not be found";
-    private static final String NODE_TO_INSERT_EXISTS_ALREADY_ERROR = "the requested node to insert exists already";
     private final int ladybugID;
     private final String existingNodeID;
     private final String newNode;
@@ -51,9 +50,6 @@ public class AddSiblingCommand implements Command<Game> {
             }
             if (!handle.getLadybug(ladybugID).getBehaviorTree().hasNode(existingNodeID)) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_NODE_ERROR);
-            }
-            if (handle.getLadybug(ladybugID).getBehaviorTree().hasNode(newNode)) {
-                throw new InvalidArgumentException(NODE_TO_INSERT_EXISTS_ALREADY_ERROR);
             }
             handle.addSibling(ladybugID, existingNodeID, newNode);
         } catch (TreeParserException | AllActionsEnabledException | InvalidArgumentException e) {

@@ -25,6 +25,7 @@ import java.util.Collections;
  */
 public class Game {
 
+    private static final String NODE_TO_INSERT_EXISTS_ALREADY_ERROR = "the requested node to insert exists already";
     private static final int ADJUST_INDEX_NUMBER = 1;
     private final List<Ladybug> ladybugs;
     private final List<Ladybug> initialLadybugs;
@@ -158,6 +159,9 @@ public class Game {
      */
     public void addSibling(int ladybugID, String existingNodeID, String newNodeRepresentation) throws TreeParserException {
         Node newNode = treeParser.parseSingleNode(newNodeRepresentation);
+        if (getLadybug(ladybugID).getBehaviorTree().hasNode(newNode.getId())) {
+            throw new TreeParserException(NODE_TO_INSERT_EXISTS_ALREADY_ERROR);
+        }
         Node parent = getLadybug(ladybugID).getBehaviorTree().findNodeByID(existingNodeID).getParent();
         ladybugs.get(ladybugID - ADJUST_INDEX_NUMBER).getBehaviorTree().addSibling(parent, existingNodeID, newNode);
     }
