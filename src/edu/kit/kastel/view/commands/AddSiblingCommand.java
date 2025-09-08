@@ -52,7 +52,7 @@ public class AddSiblingCommand implements Command<Game> {
             if (!handle.getLadybug(ladybugID).getBehaviorTree().hasNode(existingNodeID)) {
                 throw new InvalidArgumentException(COULD_NOT_FIND_NODE_ERROR);
             }
-            if (handle.getLadybug(ladybugID).getBehaviorTree().hasNode(newNode)) {
+            if (!handle.getLadybug(ladybugID).getBehaviorTree().hasNode(newNode)) {
                 throw new InvalidArgumentException(NODE_TO_INSERT_EXISTS_ALREADY_ERROR);
             }
             handle.addSibling(ladybugID, existingNodeID, newNode);
