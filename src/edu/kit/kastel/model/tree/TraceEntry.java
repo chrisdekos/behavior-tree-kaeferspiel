@@ -15,11 +15,7 @@ public record TraceEntry(
         String nodeType,
         TraceEvent event
 ) {
-
-    /**
-     * Separator used in {@link #toString()}.
-     */
-    public static final String WHITESPACE = " ";
+    private static final String WHITESPACE = " ";
 
     /**
      * Returns a string representation of this trace entry in the form: ladybugId nodeId nodeType event.

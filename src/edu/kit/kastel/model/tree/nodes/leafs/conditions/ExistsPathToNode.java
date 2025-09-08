@@ -12,6 +12,7 @@ import edu.kit.kastel.model.board.Position;
  * @author ujsap
  */
 public class ExistsPathToNode extends ConditionNode {
+    private static final String GOAL_POSITION_FORMAT = " %d,%d";
     private final Position goal;
 
     /**
@@ -37,5 +38,10 @@ public class ExistsPathToNode extends ConditionNode {
                 tickContext.getLadybug().getPosition(),
                 goal
         ) ? NodeStatus.SUCCESS : NodeStatus.FAILURE;
+    }
+
+    @Override
+    public String getSpecificType() {
+        return super.getSpecificType() + GOAL_POSITION_FORMAT.formatted(goal.column(), goal.row());
     }
 }

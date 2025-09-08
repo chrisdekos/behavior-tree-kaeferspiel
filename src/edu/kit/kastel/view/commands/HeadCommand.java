@@ -44,3 +44,4 @@ public class HeadCommand implements Command<Game> {
         return Result.success(handle.head(ladybugID).getId());
     }
 }
+

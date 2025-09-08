@@ -5,7 +5,7 @@ package edu.kit.kastel.model.tree.nodes.leafs.actions;
  * Each action type has a string representation used when parsing trees.
  * @author ujsap
  */
-public enum ActionType {
+public enum  ActionType {
     /** Move one step forward. */
     MOVE("move"),
 

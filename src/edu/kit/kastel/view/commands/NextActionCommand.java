@@ -7,6 +7,7 @@ import edu.kit.kastel.view.AllActionsEnabledException;
 import edu.kit.kastel.view.Command;
 import edu.kit.kastel.view.Result;
 import edu.kit.kastel.view.util.PrintHelpers;
+import edu.kit.kastel.view.util.TraceEntriesPrinter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class NextActionCommand implements Command<Game> {
         StringJoiner joiner = new StringJoiner(System.lineSeparator());
         for (Ladybug ladybug : ladybugsToTick) {
             for (TraceEntry traceEntry : handle.singleNextAction(ladybug.getId()).getEntries()) {
-                joiner.add(traceEntry.toString());
+                joiner.add(TraceEntriesPrinter.format(traceEntry));
             }
             joiner.add(PrintHelpers.prepareRenderedBoard(handle.getBoard(), ladybugsToTick));
         }
