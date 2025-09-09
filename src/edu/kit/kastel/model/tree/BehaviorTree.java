@@ -23,6 +23,7 @@ public class BehaviorTree {
     private final Node root;
     private final Map<String, Node> nodesByID;
     private Node currentNode;
+    private boolean jumpedSinceLastTick = false;
 
     /**
      * Creates a new behavior tree with the given root node.
@@ -60,6 +61,7 @@ public class BehaviorTree {
             root.tick(tickContext);
         }
         currentNode.tick(tickContext);
+        jumpedSinceLastTick = false;
         return trace;
     }
 
@@ -79,7 +81,7 @@ public class BehaviorTree {
         List<Node> children = currentNode.getParent().getChildren();
         int childIndex = children.indexOf(currentNode);
 
-        if (childIndex == children.size() - 1) {
+        if (childIndex == children.size() - 1 || jumpedSinceLastTick) {
             return currentNode;
         } else {
             return children.get(childIndex + 1);
@@ -98,6 +100,7 @@ public class BehaviorTree {
         }
         handleSkippedNodes(target);
         currentNode = target;
+        jumpedSinceLastTick = false;
     }
 
     private void handleSkippedNodes(Node target) {
