@@ -21,6 +21,7 @@ import java.util.List;
  * @author ujsap
  */
 public class LoadTreesCommand implements Command<Game> {
+    private static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
     private final List<String> files;
 
     /**
@@ -46,14 +47,15 @@ public class LoadTreesCommand implements Command<Game> {
             if (!handle.isBoardLoaded()) {
                 throw new BoardNotLoadedException();
             }
+            if (files.isEmpty()) {
+                throw new InvalidArgumentException(ERROR_TOO_FEW_ARGUMENTS);
+            }
             List<BehaviorTree> allTrees = new ArrayList<>();
             int assigned = 0;
 
             for (String file : files) {
                 List<String> lines = FilesReader.readInputFile(file);
-
                 System.out.println(PrintHelpers.prepareVerbatimPrint(lines));
-
                 List<Ladybug> freeLadybugs = handle.getInitialLadybugs()
                         .subList(assigned, handle.getInitialLadybugs().size());
                 List<BehaviorTree> trees = handle.loadTreeFile(lines, freeLadybugs);
