@@ -57,14 +57,6 @@ public class LoadTreesCommand implements Command<Game> {
             if (files.isEmpty()) {
                 throw new InvalidArgumentException(ERROR_TOO_FEW_ARGUMENTS);
             }
-            Set<String> seen = new HashSet<>();
-            for (String file : files) {
-                if (seen.contains(file)) {
-                    throw new InvalidArgumentException(SAME_FILE_ERROR);
-                } else {
-                    seen.add(file);
-                }
-            }
             for (String file : files) {
                 List<String> lines = FilesReader.readInputFile(file);
                 System.out.println(PrintHelpers.prepareVerbatimPrint(lines));
