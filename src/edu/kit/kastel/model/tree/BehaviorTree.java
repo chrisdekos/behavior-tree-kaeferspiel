@@ -8,6 +8,7 @@ import edu.kit.kastel.model.tree.nodes.NodeStatus;
 import edu.kit.kastel.model.tree.nodes.NodeType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -63,11 +64,26 @@ public class BehaviorTree {
     }
 
     /**
-     * Gets the current node.
+     * Gets the next node which is to be executed.
+     * In case last executed node was an action and the last child of a composite, then returns the last executed.
      * @return the current head node of the tree
      */
     public Node head() {
-        return currentNode;
+        return peekNext();
+    }
+
+    private Node peekNext() {
+        if (!currentNode.getNodeType().isAction()) {
+            return root;
+        }
+        List<Node> children = currentNode.getParent().getChildren();
+        int childIndex = children.indexOf(currentNode);
+
+        if (childIndex == children.size() - 1) {
+            return currentNode;
+        } else {
+            return children.get(childIndex + 1);
+        }
     }
 
     /**
