@@ -4,6 +4,8 @@
 
 package edu.kit.kastel.view;
 
+import java.util.StringJoiner;
+
 /**
  * This class represents the arguments of a {@link Command}.
  * @author Programmieren-Team
@@ -14,6 +16,7 @@ public class Arguments {
     private static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
     private static final String ERROR_NOT_A_NUMBER_FORMAT = "'%s' must be an integer.";
     private static final String ERROR_NOT_POSITIVE_FORMAT = "'%d' must be positive.";
+    private static final String ARGUMENT_JOIN_DELIMITER = " ";
     private final String[] arguments;
     private int argumentIndex;
 
@@ -76,4 +79,16 @@ public class Arguments {
         return value;
     }
 
+    /**
+     * Parses all remaining arguments into a single string representing a new node.
+     * This is used when parsing the arguments for an add sibling command.
+     * @return the concatenated string of all remaining arguments
+     */
+    public String parseNewNode() {
+        StringJoiner newNode = new StringJoiner(ARGUMENT_JOIN_DELIMITER);
+        while (!isExhausted()) {
+            newNode.add(arguments[argumentIndex++]);
+        }
+        return newNode.toString();
+    }
 }
