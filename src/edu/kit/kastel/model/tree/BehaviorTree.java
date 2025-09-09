@@ -100,7 +100,7 @@ public class BehaviorTree {
         }
         handleSkippedNodes(target);
         currentNode = target;
-        jumpedSinceLastTick = false;
+        jumpedSinceLastTick = true;
     }
 
     private void handleSkippedNodes(Node target) {
