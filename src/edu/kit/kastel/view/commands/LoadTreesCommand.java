@@ -12,7 +12,9 @@ import edu.kit.kastel.view.util.FilesReader;
 import edu.kit.kastel.view.util.PrintHelpers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Command to load behavior trees into the game.
@@ -55,9 +57,12 @@ public class LoadTreesCommand implements Command<Game> {
             if (files.isEmpty()) {
                 throw new InvalidArgumentException(ERROR_TOO_FEW_ARGUMENTS);
             }
+            Set<String> seen = new HashSet<>();
             for (String file : files) {
-                if (files.contains(file)) {
+                if (seen.contains(file)) {
                     throw new InvalidArgumentException(SAME_FILE_ERROR);
+                } else {
+                    seen.add(file);
                 }
             }
             for (String file : files) {
