@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class LoadTreesCommand implements Command<Game> {
     private static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
+    private static final String SAME_FILE_ERROR = "you can not load the same file twice.";
     private final List<String> files;
 
     /**
@@ -29,6 +30,7 @@ public class LoadTreesCommand implements Command<Game> {
      * @param files the list of file paths that contain behavior tree definitions
      */
     public LoadTreesCommand(List<String> files)  {
+
         this.files = files;
     }
 
@@ -43,6 +45,9 @@ public class LoadTreesCommand implements Command<Game> {
      */
     @Override
     public Result execute(Game handle) {
+        List<BehaviorTree> allTrees = new ArrayList<>();
+        int assigned = 0;
+
         try {
             if (!handle.isBoardLoaded()) {
                 throw new BoardNotLoadedException();
@@ -50,12 +55,15 @@ public class LoadTreesCommand implements Command<Game> {
             if (files.isEmpty()) {
                 throw new InvalidArgumentException(ERROR_TOO_FEW_ARGUMENTS);
             }
-            List<BehaviorTree> allTrees = new ArrayList<>();
-            int assigned = 0;
-
+            for (String file : files) {
+                if (files.contains(file)) {
+                    throw new InvalidArgumentException(SAME_FILE_ERROR);
+                }
+            }
             for (String file : files) {
                 List<String> lines = FilesReader.readInputFile(file);
                 System.out.println(PrintHelpers.prepareVerbatimPrint(lines));
+
                 List<Ladybug> freeLadybugs = handle.getInitialLadybugs()
                         .subList(assigned, handle.getInitialLadybugs().size());
                 List<BehaviorTree> trees = handle.loadTreeFile(lines, freeLadybugs);
@@ -63,11 +71,10 @@ public class LoadTreesCommand implements Command<Game> {
                 allTrees.addAll(trees);
                 assigned += trees.size();
             }
-            handle.commitTrees(allTrees);
-            return Result.success();
-
         } catch (TreeParserException | InvalidArgumentException | BoardNotLoadedException e) {
             return Result.error(e.getMessage());
         }
+        handle.commitTrees(allTrees);
+        return Result.success();
     }
 }
