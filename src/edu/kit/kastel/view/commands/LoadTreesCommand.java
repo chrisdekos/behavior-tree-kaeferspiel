@@ -12,9 +12,7 @@ import edu.kit.kastel.view.util.FilesReader;
 import edu.kit.kastel.view.util.PrintHelpers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Command to load behavior trees into the game.
