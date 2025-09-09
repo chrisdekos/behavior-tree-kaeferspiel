@@ -52,7 +52,7 @@ public class LoadTreesCommand implements Command<Game> {
             for (String file : files) {
                 List<String> lines = FilesReader.readInputFile(file);
 
-                System.out.print(PrintHelpers.prepareVerbatimPrint(lines));
+                System.out.println(PrintHelpers.prepareVerbatimPrint(lines));
 
                 List<Ladybug> freeLadybugs = handle.getInitialLadybugs()
                         .subList(assigned, handle.getInitialLadybugs().size());
