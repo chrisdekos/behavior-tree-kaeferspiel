@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class LoadTreesCommand implements Command<Game> {
     private static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
-    private static final String SAME_FILE_ERROR = "you can not load the same file twice.";
+    private static final String MORE_TREES_THAN_LADYBUGS_ERROR = "there can not be more trees than ladybugs";
     private final List<String> files;
 
     /**
@@ -49,6 +49,9 @@ public class LoadTreesCommand implements Command<Game> {
         int assigned = 0;
 
         try {
+            if (files.size() > handle.getInitialLadybugs().size()) {
+                throw new InvalidArgumentException(MORE_TREES_THAN_LADYBUGS_ERROR);
+            }
             if (!handle.isBoardLoaded()) {
                 throw new BoardNotLoadedException();
             }
