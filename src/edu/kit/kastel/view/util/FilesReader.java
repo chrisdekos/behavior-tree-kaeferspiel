@@ -37,18 +37,4 @@ public final class FilesReader {
             throw new InvalidArgumentException("could not find path");
         }
     }
-
-    /**
-     * Reads multiple tree files and merges their contents into a single list of lines.
-     * @param files the list of file paths
-     * @return a combined list of lines from all files
-     * @throws InvalidArgumentException if any of the files cannot be read or a path is invalid
-     */
-    public static List<String> mergeTreeFiles(List<String> files) throws InvalidArgumentException {
-        List<String> allLines = new ArrayList<>();
-        for (String file : files) {
-            allLines.addAll(readInputFile(file));
-        }
-        return allLines;
-    }
 }
