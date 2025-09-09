@@ -20,7 +20,7 @@ public enum ModelKeyword implements Keyword<Game> {
      * The keyword for the {@link AddSiblingCommand place} command.
      */
     ADD_SIBLING(arguments -> new AddSiblingCommand(
-            arguments.parsePositive(), arguments.parseString(), arguments.parseString())),
+            arguments.parsePositive(), arguments.parseString(), arguments.parseString().concat(arguments.parseString()))),
     /**
      * The keyword for the {@link HeadCommand move} command.
      */
