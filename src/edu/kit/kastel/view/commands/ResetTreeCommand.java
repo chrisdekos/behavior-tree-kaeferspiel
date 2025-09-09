@@ -21,7 +21,6 @@ public class ResetTreeCommand implements Command<Game> {
     public ResetTreeCommand(int ladybugID) {
         this.ladybugID = ladybugID;
     }
-
     /**
      * Executes the command: resets the behavior tree of the specified ladybug.
      * @param handle the game instance on which to execute the command

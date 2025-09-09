@@ -71,23 +71,41 @@ public class Game {
 
         setBoardLoaded();
         setTreesLoaded(false);
-
-
     }
 
     /**
-     * Loads behavior trees and assigns them to the ladybugs.
-     * It sets the board to its initial state.
-     * @param treeFiles the textual tree descriptions
-     * @throws TreeParserException if a tree cannot be parsed
+     * Returns the initial list of all ladybugs.
+     * @return the list of ladybugs
      */
-    public void loadTrees(List<String> treeFiles) throws TreeParserException {
+    public List<Ladybug> getInitialLadybugs() {
+        return this.initialLadybugs;
+    }
+
+    /**
+     * Parses behavior trees from the given file contents without modifying the game state.
+     * @param lines        the contents of the tree file
+     * @param freeLadybugs the list of ladybugs that are not yet assigned to a tree
+     * @return a list of parsed {@link BehaviorTree} objects
+     * @throws TreeParserException if an error occurs while parsing the trees
+     */
+    public List<BehaviorTree> loadTreeFile(List<String> lines, List<Ladybug> freeLadybugs) throws TreeParserException {
+        return treeParser.parse(lines, freeLadybugs);
+    }
+
+    /**
+     * Commits the given behavior trees to the ladybugs.
+     * This method resets the board and ladybugs first, then assigns
+     * each tree from the provided list to the corresponding ladybug
+     * by index. After assignment, the ladybugs are marked as active
+     * and the flag indicating that trees have been loaded is set.
+     * @param allTrees the list of behavior trees to assign to the ladybugs
+     */
+    public void commitTrees(List<BehaviorTree> allTrees) {
         resetBoardAndLadybugs();
-        List<BehaviorTree> behaviorTrees = treeParser.parse(treeFiles, ladybugs);
-        for (int i = 0; i < behaviorTrees.size(); i++) {
-            Ladybug ladybug = ladybugs.get(i);
-            ladybug.setBehaviorTree(behaviorTrees.get(i));
-            ladybug.setActive(true);
+        for (int i = 0; i < allTrees.size(); i++) {
+            Ladybug lb = ladybugs.get(i);
+            lb.setBehaviorTree(allTrees.get(i));
+            lb.setActive(true);
         }
         setTreesLoaded(true);
     }
