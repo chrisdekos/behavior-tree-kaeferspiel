@@ -1,6 +1,6 @@
 package edu.kit.kastel.view.util;
 
-import edu.kit.kastel.view.InvalidArgumentException;
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 
 import java.io.IOException;
 import java.nio.file.Files;

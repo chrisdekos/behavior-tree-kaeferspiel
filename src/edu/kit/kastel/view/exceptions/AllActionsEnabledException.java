@@ -1,4 +1,4 @@
-package edu.kit.kastel.view;
+package edu.kit.kastel.view.exceptions;
 
 /**
  * Exception thrown when a command is requested before both the board and the behavior trees are loaded.

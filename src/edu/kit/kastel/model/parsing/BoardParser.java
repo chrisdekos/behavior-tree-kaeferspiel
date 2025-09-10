@@ -43,7 +43,8 @@ public final class BoardParser {
 
                 Direction direction = Direction.fromChar(character);
                 if (direction != null) {
-                    ladybugs.add(new Ladybug(ladybugID++, new Position(column, rowIndex), direction));
+                    ladybugs.add(new Ladybug(ladybugID, new Position(column, rowIndex), direction));
+                    ladybugID++;
                     board[rowIndex][column] = CellType.EMPTY;
                     continue;
                 }

@@ -4,8 +4,6 @@ import edu.kit.kastel.model.tree.TickContext;
 import edu.kit.kastel.model.tree.nodes.Node;
 import edu.kit.kastel.model.tree.nodes.NodeStatus;
 import edu.kit.kastel.model.tree.nodes.NodeType;
-
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -24,7 +22,6 @@ public abstract class CompositeNode extends Node {
      */
     protected CompositeNode(String id, NodeType nodeType, Node parent) {
         super(id, nodeType, parent);
-        this.children = new ArrayList<>();
     }
 
     /**

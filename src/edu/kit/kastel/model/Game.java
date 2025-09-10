@@ -78,7 +78,7 @@ public class Game {
      * @return the list of ladybugs
      */
     public List<Ladybug> getInitialLadybugs() {
-        return this.initialLadybugs;
+        return Collections.unmodifiableList(this.initialLadybugs);
     }
 
     /**
@@ -129,12 +129,7 @@ public class Game {
         return Collections.unmodifiableList(this.ladybugs);
     }
 
-    /**
-     * Collects the positions of the given ladybugs.
-     * @param ladybugs the list of ladybugs
-     * @return a set of their positions
-     */
-    public Set<Position> getLadybugPositions(List<Ladybug> ladybugs) {
+    private Set<Position> getLadybugPositions(List<Ladybug> ladybugs) {
         Set<Position> positions = new HashSet<>();
         for (Ladybug ladybug : ladybugs) {
             positions.add(ladybug.getPosition());
@@ -239,8 +234,8 @@ public class Game {
      * Checks if further actions except load board and load trees can be used.
      * @return true if both board and trees are loaded
      */
-    public boolean allActionsEnabled() {
-        return areTreesLoaded() && isBoardLoaded();
+    public boolean areActionsBlocked() {
+        return !(areTreesLoaded() && isBoardLoaded());
     }
 
     /**

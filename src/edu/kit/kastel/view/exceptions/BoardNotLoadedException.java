@@ -1,4 +1,4 @@
-package edu.kit.kastel.view;
+package edu.kit.kastel.view.exceptions;
 
 /**
  * Exception thrown when an operation is attempted before the board has been loaded.

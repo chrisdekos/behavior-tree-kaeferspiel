@@ -7,6 +7,7 @@ package edu.kit.kastel.view;
 import edu.kit.kastel.model.Game;
 import edu.kit.kastel.view.commands.ModelKeyword;
 import edu.kit.kastel.view.commands.ViewKeyword;
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 
 import java.io.InputStream;
 import java.io.PrintStream;

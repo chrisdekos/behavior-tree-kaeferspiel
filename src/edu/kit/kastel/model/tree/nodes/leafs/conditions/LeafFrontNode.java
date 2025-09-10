@@ -28,7 +28,7 @@ public class LeafFrontNode extends FrontConditionNode {
      *         {@link NodeStatus#FAILURE} otherwise
      */
     @Override
-    protected NodeStatus checkCondition(TickContext tickContext) {
-        return checkFrontCell(tickContext, CellType.LEAF);
+    protected NodeStatus executeCondition(TickContext tickContext) {
+        return executeFrontCell(tickContext, CellType.LEAF);
     }
 }

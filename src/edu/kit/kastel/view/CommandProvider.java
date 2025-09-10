@@ -4,6 +4,8 @@
 
 package edu.kit.kastel.view;
 
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
+
 /**
  * This interface provides a command instance constructed with the given arguments.
  * @param <T> the type of the value that is handled by the command

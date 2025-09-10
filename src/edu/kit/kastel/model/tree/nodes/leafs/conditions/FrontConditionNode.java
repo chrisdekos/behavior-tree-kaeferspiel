@@ -18,7 +18,7 @@ public abstract class FrontConditionNode extends ConditionNode {
      * @param parent        the parent node
      * @param conditionType the type of the condition
      */
-    public FrontConditionNode(String id, Node parent, ConditionType conditionType) {
+    protected FrontConditionNode(String id, Node parent, ConditionType conditionType) {
         super(id, parent, conditionType);
     }
 
@@ -29,7 +29,7 @@ public abstract class FrontConditionNode extends ConditionNode {
      * @return {@link NodeStatus#SUCCESS} if the cell matches,
      *         {@link NodeStatus#FAILURE} otherwise
      */
-    protected final NodeStatus checkFrontCell(TickContext tickContext, CellType expected) {
+    protected final NodeStatus executeFrontCell(TickContext tickContext, CellType expected) {
         if (!tickContext.getBoard().isWithinBounds(tickContext.getLadybug().getCellInFront())) {
             return NodeStatus.FAILURE;
         }

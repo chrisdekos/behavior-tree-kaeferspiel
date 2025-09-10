@@ -2,9 +2,9 @@ package edu.kit.kastel.view.commands;
 
 import edu.kit.kastel.model.Game;
 import edu.kit.kastel.model.board.Position;
-import edu.kit.kastel.view.AllActionsEnabledException;
+import edu.kit.kastel.view.exceptions.AllActionsEnabledException;
 import edu.kit.kastel.view.Command;
-import edu.kit.kastel.view.InvalidArgumentException;
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 import edu.kit.kastel.view.Result;
 
 import static edu.kit.kastel.view.util.PrintHelpers.toViewPosition;
@@ -14,8 +14,6 @@ import static edu.kit.kastel.view.util.PrintHelpers.toViewPosition;
  * @author ujsap
  */
 public class PrintPositionCommand implements Command<Game> {
-    private static final String COULD_NOT_FIND_LADYBUG_ERROR = "ladybug could not be found";
-
     private final int ladybugID;
 
     /**
@@ -34,17 +32,12 @@ public class PrintPositionCommand implements Command<Game> {
      */
     @Override
     public Result execute(Game handle) {
-        try {
-            if (!handle.allActionsEnabled()) {
-                throw new AllActionsEnabledException();
-            }
-            if (!handle.getLadybug(ladybugID).getIfActive()) {
-                throw new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR);
-            }
-        } catch (AllActionsEnabledException | InvalidArgumentException e) {
-            return Result.error(e.getMessage());
+        if (handle.areActionsBlocked()) {
+            return Result.error(new AllActionsEnabledException().getMessage());
         }
-
+        if (!handle.getLadybug(ladybugID).getIfActive()) {
+            return Result.error(new InvalidArgumentException(COULD_NOT_FIND_LADYBUG_ERROR).getMessage());
+        }
         Position position = handle.getLadybug(ladybugID).getPosition();
         return Result.success(toViewPosition(position));
     }

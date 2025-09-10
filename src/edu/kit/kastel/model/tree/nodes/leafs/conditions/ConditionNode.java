@@ -9,7 +9,7 @@ import edu.kit.kastel.model.tree.nodes.leafs.LeafNode;
 /**
  * Base class for all condition nodes in a behavior tree.
  * A condition node checks a specific state in the environment.
- * Subclasses implement the concrete check in {@link #checkCondition(TickContext)}.
+ * Subclasses implement the concrete check in {@link #executeCondition(TickContext)}.
  * @author ujasp
  */
 public abstract class ConditionNode extends LeafNode {
@@ -21,15 +21,12 @@ public abstract class ConditionNode extends LeafNode {
      * @param parent        the parent node
      * @param conditionType the specific condition type
      */
-    public ConditionNode(String id, Node parent, ConditionType conditionType) {
+    protected ConditionNode(String id, Node parent, ConditionType conditionType) {
         super(id, NodeType.CONDITION, parent);
         this.conditionType = conditionType;
     }
 
-    /**
-     * @return the type of this condition
-     */
-    protected ConditionType getConditionType() {
+    private ConditionType getConditionType() {
         return this.conditionType;
     }
 
@@ -43,13 +40,13 @@ public abstract class ConditionNode extends LeafNode {
     }
 
     /**
-     * Evaluates this condition by calling {@link #checkCondition(TickContext)}.
+     * Evaluates this condition by calling {@link #executeCondition(TickContext)}.
      * @param tickContext the context for this tick
      * @return the result of the condition check
      */
     @Override
     protected NodeStatus evaluate(TickContext tickContext) {
-        return checkCondition(tickContext);
+        return executeCondition(tickContext);
     }
 
     /**
@@ -58,5 +55,5 @@ public abstract class ConditionNode extends LeafNode {
      * @return {@link NodeStatus#SUCCESS} if the condition is true,
      *         {@link NodeStatus#FAILURE} otherwise
      */
-    protected abstract NodeStatus checkCondition(TickContext tickContext);
+    protected abstract NodeStatus executeCondition(TickContext tickContext);
 }

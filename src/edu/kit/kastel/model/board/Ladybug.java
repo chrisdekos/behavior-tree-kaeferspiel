@@ -27,7 +27,7 @@ public class Ladybug {
         this.id = id;
         this.position = position;
         this.direction = direction;
-        isActive = false;
+        this.isActive = false;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Ladybug {
      * Moves the ladybug to the given position.
      * @param newPosition the target position
      */
-    public void moveTo(Position newPosition) {
+    private void moveTo(Position newPosition) {
         setPosition(newPosition);
     }
 
@@ -105,15 +105,10 @@ public class Ladybug {
      */
     public boolean moveForward(Board board, Set<Position> ladybugPositions) {
         Position front = getCellInFront();
-        if (!board.isWithinBounds(front)) {
+        if (!canEnterFront(board, ladybugPositions, front)) {
             return false;
         }
-
-        if (ladybugPositions.contains(front)) {
-            return false;
-        }
-        CellType frontType = board.getCellType(front);
-        switch (frontType) {
+        switch (board.getCellType(front)) {
             case EMPTY -> {
                 moveTo(front);
                 return true;
@@ -132,6 +127,10 @@ public class Ladybug {
                 return false;
             }
         }
+    }
+
+    private boolean canEnterFront(Board board, Set<Position> ladybugPositions, Position front) {
+        return board.isWithinBounds(front) && !ladybugPositions.contains(front);
     }
 
     private void moveMushroom(Board board, Position from, Position to) {
@@ -209,7 +208,6 @@ public class Ladybug {
         if (deltaY == 0 && deltaX == 0) {
             return this.direction;
         }
-
         if (Math.abs(deltaX) >= Math.abs(deltaY)) {
             return deltaX > 0 ? Direction.RIGHT : Direction.LEFT;
         } else {
@@ -237,7 +235,7 @@ public class Ladybug {
 
 
     /**
-     * Sets whether the ladybug is active.
+     * Setter for the isActive attrivute.
      * @param value true to activate, false to deactivate
      */
     public void setActive(boolean value) {

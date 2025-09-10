@@ -4,6 +4,8 @@
 
 package edu.kit.kastel.view;
 
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
+
 import java.util.StringJoiner;
 
 /**
@@ -12,8 +14,11 @@ import java.util.StringJoiner;
  * @author ujsap
  */
 public class Arguments {
-
-    private static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
+    /**
+     * A constant with an error message, in case user provides too few arguments.
+     * It is being used by many classes.
+     */
+    public static final String ERROR_TOO_FEW_ARGUMENTS = "too few arguments";
     private static final String ERROR_NOT_A_NUMBER_FORMAT = "'%s' must be an integer.";
     private static final String ERROR_NOT_POSITIVE_FORMAT = "'%d' must be positive.";
     private static final String ARGUMENT_JOIN_DELIMITER = " ";
@@ -52,12 +57,7 @@ public class Arguments {
         return retrieveArgument();
     }
 
-    /**
-     * Parses the next argument as an integer.
-     * @return the argument as an integer
-     * @throws InvalidArgumentException if the argument could not get parsed
-     */
-    public int parseInteger() throws InvalidArgumentException {
+    private int parseInteger() throws InvalidArgumentException {
         String argument = retrieveArgument();
         try {
             return Integer.parseInt(argument);

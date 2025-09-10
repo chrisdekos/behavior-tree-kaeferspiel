@@ -5,7 +5,7 @@ import edu.kit.kastel.view.CommandProvider;
 import edu.kit.kastel.view.Command;
 import edu.kit.kastel.view.Keyword;
 import edu.kit.kastel.view.Arguments;
-import edu.kit.kastel.view.InvalidArgumentException;
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 
 import java.util.ArrayList;
 import java.util.List;

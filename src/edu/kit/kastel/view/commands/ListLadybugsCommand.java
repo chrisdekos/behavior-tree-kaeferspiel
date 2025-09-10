@@ -2,7 +2,7 @@ package edu.kit.kastel.view.commands;
 
 import edu.kit.kastel.model.Game;
 import edu.kit.kastel.model.board.Ladybug;
-import edu.kit.kastel.view.AllActionsEnabledException;
+import edu.kit.kastel.view.exceptions.AllActionsEnabledException;
 import edu.kit.kastel.view.Command;
 import edu.kit.kastel.view.Result;
 
@@ -25,14 +25,9 @@ public class ListLadybugsCommand implements Command<Game> {
      */
     @Override
     public Result execute(Game handle) {
-        try {
-            if (!handle.allActionsEnabled()) {
-                throw new AllActionsEnabledException();
-            }
-        } catch (AllActionsEnabledException e) {
-            return Result.error(e.getMessage());
+        if (handle.areActionsBlocked()) {
+            return Result.error(new AllActionsEnabledException().getMessage());
         }
-
         StringJoiner stringJoiner = new StringJoiner(WHITESPACE);
         for (Ladybug ladybug : handle.listLadybugs()) {
             if (!ladybug.getIfActive()) {

@@ -28,7 +28,7 @@ public class AtEdgeNode extends ConditionNode {
      *         {@link NodeStatus#FAILURE} otherwise
      */
     @Override
-    protected NodeStatus checkCondition(TickContext tickContext) {
+    protected NodeStatus executeCondition(TickContext tickContext) {
         return tickContext.getBoard().neighbors(
                 tickContext.getLadybug().getPosition()
         ).size() < Direction.values().length

@@ -7,5 +7,4 @@ package edu.kit.kastel.model.board;
  * @author ujsap
  */
 public record Position(int column, int row) {
-    private static final String REPRESENTATION = "(%d, %d)";
 }

@@ -21,16 +21,12 @@ public abstract class ActionNode extends LeafNode {
      * @param parent     the parent node
      * @param actionType the specific action type
      */
-    public ActionNode(String id, Node parent, ActionType actionType) {
+    protected ActionNode(String id, Node parent, ActionType actionType) {
         super(id, NodeType.ACTION, parent);
         this.actionType = actionType;
     }
 
-    /**
-     * Gets the type of this action
-     * @return the type of this action
-     */
-    protected ActionType getActionType() {
+    private ActionType getActionType() {
         return this.actionType;
     }
 

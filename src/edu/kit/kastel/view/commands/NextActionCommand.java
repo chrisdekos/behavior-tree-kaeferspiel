@@ -3,7 +3,7 @@ package edu.kit.kastel.view.commands;
 import edu.kit.kastel.model.Game;
 import edu.kit.kastel.model.tree.TraceEntry;
 import edu.kit.kastel.model.board.Ladybug;
-import edu.kit.kastel.view.AllActionsEnabledException;
+import edu.kit.kastel.view.exceptions.AllActionsEnabledException;
 import edu.kit.kastel.view.Command;
 import edu.kit.kastel.view.Result;
 import edu.kit.kastel.view.util.PrintHelpers;
@@ -29,12 +29,9 @@ public class NextActionCommand implements Command<Game> {
      */
     @Override
     public Result execute(Game handle) {
-        try {
-            if (!handle.allActionsEnabled()) {
-                throw new AllActionsEnabledException();
-            }
-        } catch (AllActionsEnabledException e) {
-            return Result.error(e.getMessage());
+
+        if (handle.areActionsBlocked()) {
+            return Result.error(new AllActionsEnabledException().getMessage());
         }
 
         List<Ladybug> ladybugsToTick = new ArrayList<>();
@@ -51,7 +48,6 @@ public class NextActionCommand implements Command<Game> {
             }
             joiner.add(PrintHelpers.prepareRenderedBoard(handle.getBoard(), ladybugsToTick));
         }
-
         return Result.success(joiner.toString());
     }
 }

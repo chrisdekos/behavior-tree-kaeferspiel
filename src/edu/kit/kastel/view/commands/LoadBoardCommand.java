@@ -3,7 +3,7 @@ package edu.kit.kastel.view.commands;
 import edu.kit.kastel.model.Game;
 import edu.kit.kastel.model.exceptions.BoardParserException;
 import edu.kit.kastel.view.Command;
-import edu.kit.kastel.view.InvalidArgumentException;
+import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 import edu.kit.kastel.view.Result;
 import edu.kit.kastel.view.util.FilesReader;
 import edu.kit.kastel.view.util.PrintHelpers;

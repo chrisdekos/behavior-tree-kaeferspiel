@@ -36,7 +36,7 @@ public class ExistsPathBetweenNode extends ConditionNode {
      *         {@link NodeStatus#FAILURE} otherwise
      */
     @Override
-    protected NodeStatus checkCondition(TickContext tickContext) {
+    protected NodeStatus executeCondition(TickContext tickContext) {
         return tickContext.getBoard().existsPath(start, goal)
                 ? NodeStatus.SUCCESS
                 : NodeStatus.FAILURE;

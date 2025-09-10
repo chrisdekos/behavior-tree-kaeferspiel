@@ -28,7 +28,7 @@ public class MushroomFrontNode extends FrontConditionNode {
      *         {@link NodeStatus#FAILURE} otherwise
      */
     @Override
-    protected NodeStatus checkCondition(TickContext tickContext) {
-        return checkFrontCell(tickContext, CellType.MUSHROOM);
+    protected NodeStatus executeCondition(TickContext tickContext) {
+        return executeFrontCell(tickContext, CellType.MUSHROOM);
     }
 }

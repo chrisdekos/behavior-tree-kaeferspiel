@@ -64,6 +64,9 @@ public final class TreeParser {
     private static final String INVALID_PARALLEL_THRESHOLD_ERROR = "invalid parallel threshold: ";
     private static final String REGEX_GROUP_NUMBER = "number";
 
+    // regex for one or more whitespaces
+    private static final String WHITESPACE_REGEX = "\\s+";
+
     // matches exactly the tree header "flowchart TD"
     private static final Pattern TREE_HEADER_REGEX = Pattern.compile("^flowchart TD$");
 
@@ -229,7 +232,7 @@ public final class TreeParser {
     }
 
     private Node createActionNode(String id, String representation) throws TreeParserException {
-        String[] parts = representation.split("\\s+", LIMIT_TO_SPLIT);
+        String[] parts = representation.split(WHITESPACE_REGEX, LIMIT_TO_SPLIT);
         String key = parts[0];
         String args = (parts.length > 1) ? parts[1].trim() : "";
 
@@ -304,7 +307,7 @@ public final class TreeParser {
         return switch (nodeType) {
             case ACTION -> {
                 Matcher action = BRACKET_REGEX_FORMAT.matcher(representation);
-                yield action.matches() ? action.group("inner") : EMPTY_TEXT;
+                yield action.matches() ? action.group(REGEX_GROUP_INNER) : EMPTY_TEXT;
             }
             case CONDITION -> {
                 Matcher condition = CONDITION_REGEX_FORMAT.matcher(representation);
