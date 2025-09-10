@@ -32,7 +32,7 @@ public abstract class Node {
         this.id = id;
         this.nodeType = nodeType;
         this.parent = parent;
-        this.children = Collections.emptyList();
+        children = Collections.emptyList();
         this.nodeStatus = NodeStatus.ENTRY;
     }
 
