@@ -27,7 +27,7 @@ public class Game {
 
     private static final String NODE_TO_INSERT_EXISTS_ALREADY_ERROR = "the requested node to insert exists already";
     private static final int ADJUST_INDEX_NUMBER = 1;
-    public static final int INITIAL_COUNT = 0;
+    private static final int INITIAL_COUNT = 0;
     private final List<Ladybug> ladybugs;
     private final List<Ladybug> initialLadybugs;
     private Board board;
