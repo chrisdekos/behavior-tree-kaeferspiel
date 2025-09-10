@@ -15,6 +15,9 @@ import java.util.List;
  */
 public final class FilesReader {
 
+    private static final String WRONG_FILE_FORMAT_ERROR = "file format is not correct";
+    private static final String PATH_NOT_FOUND_ERROR = "could not find path";
+
     /** Private constructor to prevent creating an instance of this object. */
     private FilesReader() {
         // Utility class
@@ -31,9 +34,9 @@ public final class FilesReader {
             Path file = Paths.get(path);
             return Files.readAllLines(file);
         } catch (IOException e) {
-            throw new InvalidArgumentException("file format is not correct");
+            throw new InvalidArgumentException(WRONG_FILE_FORMAT_ERROR);
         } catch (InvalidPathException e) {
-            throw new InvalidArgumentException("could not find path");
+            throw new InvalidArgumentException(PATH_NOT_FOUND_ERROR);
         }
     }
 }

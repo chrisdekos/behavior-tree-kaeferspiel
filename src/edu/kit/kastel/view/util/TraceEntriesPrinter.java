@@ -14,6 +14,8 @@ import edu.kit.kastel.model.tree.nodes.leafs.conditions.ConditionType;
 public final class TraceEntriesPrinter {
     private static final String COORDINATES_SEPARATOR = " ";
     private static final String COORDINATES_SPLITTER = ",";
+    private static final int COLUMN_INDEX = 1;
+    private static final int ROW_INDEX = 2;
 
     private TraceEntriesPrinter() {
         // Utility class
@@ -42,8 +44,8 @@ public final class TraceEntriesPrinter {
 
         for (int i = 1; i < parts.length; i++) {
             String[] coordinates = parts[i].split(COORDINATES_SPLITTER);
-            int col = Integer.parseInt(coordinates[0]);
-            int row = Integer.parseInt(coordinates[1]);
+            int col = Integer.parseInt(coordinates[COLUMN_INDEX]);
+            int row = Integer.parseInt(coordinates[ROW_INDEX]);
             String viewCoordinates = PrintHelpers.toViewCoordinates(new Position(col, row));
             newNodeType.append(COORDINATES_SEPARATOR).append(viewCoordinates);
         }

@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
  * Parses behavior trees written in a mermaid syntax notation.
  * Each tree starts with the header flowchart TD, followed by edges
@@ -63,6 +62,13 @@ public final class TreeParser {
     private static final String OVERRIDING_A_NODE_ERROR = "overriding a node is not possible";
     private static final String INVALID_PARALLEL_THRESHOLD_ERROR = "invalid parallel threshold: ";
     private static final String REGEX_GROUP_NUMBER = "number";
+    private static final int INITIAL_TREE_COUNT = 0;
+    private static final int COMMAND_ARGUMENT_INDEX = 1;
+    private static final int REGEX_GROUP_ROW = 1;
+    private static final int REGEX_GROUP_COLUMN = 2;
+    private static final int INPUT_TO_MODEL_ADJUSTER = 1;
+    private static final String STANDARD_EMPTY_TEXT_VALUE = "";
+    private static final int FIRST_PART_INDEX = 0;
 
     // regex for one or more whitespaces
     private static final String WHITESPACE_REGEX = "\\s+";
@@ -174,7 +180,7 @@ public final class TreeParser {
         if (inTree) {
             behaviorTrees.add(createCurrentTree());
         }
-        treeCount = 0;
+        treeCount = INITIAL_TREE_COUNT;
         return behaviorTrees;
     }
 
@@ -233,8 +239,9 @@ public final class TreeParser {
 
     private Node createActionNode(String id, String representation) throws TreeParserException {
         String[] parts = representation.split(WHITESPACE_REGEX, LIMIT_TO_SPLIT);
-        String key = parts[0];
-        String args = (parts.length > 1) ? parts[1].trim() : "";
+        String key = parts[FIRST_PART_INDEX];
+        String args = (parts.length > COMMAND_ARGUMENT_INDEX)
+                ? parts[COMMAND_ARGUMENT_INDEX].trim() : STANDARD_EMPTY_TEXT_VALUE;
 
         ActionType type = ActionType.fromString(key);
         if (type == null) {
@@ -317,13 +324,13 @@ public final class TreeParser {
         };
     }
 
-    private static Position toPosition(String token) {
+    private Position toPosition(String token) {
         Matcher positionMatcher = COORDINATES_REGEX.matcher(token);
         if (!positionMatcher.matches()) {
             return null;
         }
-        int row = Integer.parseInt(positionMatcher.group(1)) - 1;
-        int col = Integer.parseInt(positionMatcher.group(2)) - 1;
+        int row = Integer.parseInt(positionMatcher.group(REGEX_GROUP_ROW)) - INPUT_TO_MODEL_ADJUSTER;
+        int col = Integer.parseInt(positionMatcher.group(REGEX_GROUP_COLUMN)) - INPUT_TO_MODEL_ADJUSTER;
         return new Position(row, col);
     }
 
@@ -332,8 +339,8 @@ public final class TreeParser {
         Matcher coordinatesMatcher = COORDINATES_REGEX.matcher(text);
         List<Position> positions = new ArrayList<>();
         while (coordinatesMatcher.find()) {
-            int row = Integer.parseInt(coordinatesMatcher.group(1)) - 1;
-            int col = Integer.parseInt(coordinatesMatcher.group(2)) - 1;
+            int row = Integer.parseInt(coordinatesMatcher.group(REGEX_GROUP_ROW)) - INPUT_TO_MODEL_ADJUSTER;
+            int col = Integer.parseInt(coordinatesMatcher.group(REGEX_GROUP_COLUMN)) - INPUT_TO_MODEL_ADJUSTER;
             positions.add(new Position(row, col));
         }
         return positions;

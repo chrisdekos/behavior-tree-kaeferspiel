@@ -3,8 +3,6 @@ package edu.kit.kastel.model.tree;
 import edu.kit.kastel.model.board.Board;
 import edu.kit.kastel.model.board.Ladybug;
 import edu.kit.kastel.model.board.Position;
-
-import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -32,7 +30,7 @@ public class TickContext {
         this.board = board;
         this.trace = trace;
         this.ladybug = ladybug;
-        this.ladybugPositions = ladybugPositions;
+        this.ladybugPositions = Set.copyOf(ladybugPositions);
         this.stopRequested = false;
     }
 
@@ -72,7 +70,7 @@ public class TickContext {
      * @return an unmodifiable view of the positions of all ladybugs
      */
     public Set<Position> getLadybugPositions() {
-        return Collections.unmodifiableSet(ladybugPositions);
+        return ladybugPositions;
     }
 
     /**

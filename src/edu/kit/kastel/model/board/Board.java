@@ -18,6 +18,7 @@ public class Board {
 
     private static final int FIRST_ROW = 0;
     private static final int FIRST_COLUMN = 0;
+    private static final int MAXIMUM_NEIGHBORS_CAPACITY = 4;
     private final CellType[][] board;
 
     /**
@@ -74,12 +75,11 @@ public class Board {
      * @return a list of neighbors within the board
      */
     public List<Position> neighbors(Position position) {
-        List<Position> neighbors = new ArrayList<>(4);
+        List<Position> neighbors = new ArrayList<>(MAXIMUM_NEIGHBORS_CAPACITY);
         for (Direction direction : Direction.values()) {
             Position neighbor = new Position(
                     position.column() + direction.getDeltaColumn(),
-                    position.row() + direction.getDeltaRow()
-            );
+                    position.row() + direction.getDeltaRow());
             if (isWithinBounds(neighbor)) {
                 neighbors.add(neighbor);
             }

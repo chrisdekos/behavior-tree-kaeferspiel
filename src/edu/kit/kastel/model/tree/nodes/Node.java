@@ -16,13 +16,12 @@ import java.util.Map;
  * @author ujsap
  */
 public abstract class Node {
-
-    protected List<Node> children;
+    private static final int NEXT_INDEX_NUMBER = 1;
+    private final List<Node> children;
     private final String id;
     private final NodeType nodeType;
     private Node parent;
     private NodeStatus nodeStatus;
-
 
     /**
      * Creates a new node.
@@ -51,6 +50,17 @@ public abstract class Node {
      */
     public void setParent(Node parent) {
         this.parent = parent;
+    }
+
+    /**
+     * Inserts a new child node directly after an existing child.
+     * @param existing the existing child node
+     * @param newChild the new child node to insert
+     */
+    public void insertChildAfter(Node existing, Node newChild) {
+        int existingIndex = indexOfChild(existing);
+        children.add(existingIndex + NEXT_INDEX_NUMBER, newChild);
+        newChild.setParent(this);
     }
 
     /**
@@ -124,7 +134,7 @@ public abstract class Node {
      * @param child the child node to find the index from
      * @return the index of the given child
      */
-    protected final int indexOfChild(Node child) {
+    private int indexOfChild(Node child) {
         return this.children.indexOf(child);
     }
 
@@ -141,15 +151,6 @@ public abstract class Node {
      * Is an empty method, so subclasses from node can override it.
      */
     public void resetState() {
-    }
-
-    /**
-     * Inserts a new child after an existing child.
-     * Is an empty method, so subclasses from node can override it.
-     * @param existing the existing node, to add the child after
-     * @param newChild the new child to be added
-     */
-    public void insertChildAfter(Node existing, Node newChild) {
     }
 
     /**

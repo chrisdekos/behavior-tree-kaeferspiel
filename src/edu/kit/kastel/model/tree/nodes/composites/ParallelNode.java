@@ -13,7 +13,7 @@ import edu.kit.kastel.model.tree.nodes.NodeType;
  * @author ujsap
  */
 public class ParallelNode extends CompositeNode {
-
+    private static final int INITIAL_SUCESS_COUNT = 0;
     private final int threshold;
 
     /**
@@ -64,8 +64,8 @@ public class ParallelNode extends CompositeNode {
      * @return the number of successful children
      */
     private int countSuccesses() {
-        int successCount = 0;
-        for (Node child : children) {
+        int successCount = INITIAL_SUCESS_COUNT;
+        for (Node child : getChildren()) {
             if (child.getNodeStatus() == NodeStatus.SUCCESS) {
                 successCount++;
             }

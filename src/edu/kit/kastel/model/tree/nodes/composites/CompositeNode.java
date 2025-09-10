@@ -12,7 +12,6 @@ import java.util.Map;
  * @author ujsap
  */
 public abstract class CompositeNode extends Node {
-    private static final int NEXT_INDEX_NUMBER = 1;
 
     /**
      * Creates a new CompositeNode.
@@ -43,17 +42,7 @@ public abstract class CompositeNode extends Node {
         }
     }
 
-    /**
-     * Inserts a new child node directly after an existing child.
-     * @param existing the existing child node
-     * @param newChild the new child node to insert
-     */
-    @Override
-    public void insertChildAfter(Node existing, Node newChild) {
-        int existingIndex = indexOfChild(existing);
-        children.add(existingIndex + NEXT_INDEX_NUMBER, newChild);
-        newChild.setParent(this);
-    }
+
 
     /**
      * Registers this node and all of its children in the given index.
@@ -62,7 +51,7 @@ public abstract class CompositeNode extends Node {
     @Override
     public void registerSubtree(Map<String, Node> index) {
         index.put(getId(), this);
-        for (Node child : children) {
+        for (Node child : getChildren()) {
             child.registerSubtree(index);
         }
     }
@@ -83,7 +72,7 @@ public abstract class CompositeNode extends Node {
                                                  NodeStatus defaultIfNoBreak) {
 
         ensureEntry(tickContext);
-        for (Node child : children) {
+        for (Node child : getChildren()) {
             NodeStatus preStatus = child.getNodeStatus();
             if (preStatus == breakOn) {
                 setNodeStatus(preStatus);
@@ -124,7 +113,7 @@ public abstract class CompositeNode extends Node {
     @Override
     public void resetState() {
         setNodeStatus(NodeStatus.ENTRY);
-        for (Node child : children) {
+        for (Node child : getChildren()) {
             child.setNodeStatus(NodeStatus.ENTRY);
         }
     }

@@ -14,7 +14,6 @@ public final class KaraTrees {
     private KaraTrees() {
         // Utility class: prevent instantiation
     }
-
     /**
      * Starts the KaraTrees application.
      * @param args command-line arguments, which are never used

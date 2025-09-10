@@ -21,6 +21,7 @@ public enum ViewKeyword implements Keyword<UserInterface> {
     QUIT(arguments -> new QuitCommand());
 
     private static final String VALUE_NAME_DELIMITER = "_";
+    private static final int FIRST_PART = 0;
     private final CommandProvider<UserInterface> provider;
 
     ViewKeyword(CommandProvider<UserInterface> provider) {
@@ -34,7 +35,7 @@ public enum ViewKeyword implements Keyword<UserInterface> {
 
     @Override
     public boolean matches(String[] command)  {
-        return name().toLowerCase().equals(command[0]);
+        return name().toLowerCase().equals(command[FIRST_PART]);
     }
 
     @Override

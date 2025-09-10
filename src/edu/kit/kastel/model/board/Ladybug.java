@@ -10,7 +10,7 @@ import java.util.Set;
  * @author ujsap
  */
 public class Ladybug {
-
+    private static final int NO_MOVEMENT_DELTA = 0;
     private final int id;
     private Position position;
     private Direction direction;
@@ -205,13 +205,13 @@ public class Ladybug {
         int deltaX = goal.column() - this.position.column();
         int deltaY = goal.row() - this.position.row();
 
-        if (deltaY == 0 && deltaX == 0) {
+        if (deltaY == NO_MOVEMENT_DELTA && deltaX == NO_MOVEMENT_DELTA) {
             return this.direction;
         }
         if (Math.abs(deltaX) >= Math.abs(deltaY)) {
-            return deltaX > 0 ? Direction.RIGHT : Direction.LEFT;
+            return deltaX > NO_MOVEMENT_DELTA ? Direction.RIGHT : Direction.LEFT;
         } else {
-            return deltaY < 0 ? Direction.UP : Direction.DOWN;
+            return deltaY < NO_MOVEMENT_DELTA ? Direction.UP : Direction.DOWN;
         }
     }
 

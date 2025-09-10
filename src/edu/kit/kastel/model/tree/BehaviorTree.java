@@ -19,7 +19,7 @@ import java.util.Set;
  * @author ujsap
  */
 public class BehaviorTree {
-
+    private static final int INDEX_ADJUSTER = 1;
     private final Node root;
     private final Map<String, Node> nodesByID;
     private Node currentNode;
@@ -81,10 +81,10 @@ public class BehaviorTree {
         List<Node> children = currentNode.getParent().getChildren();
         int childIndex = children.indexOf(currentNode);
 
-        if (childIndex == children.size() - 1 || jumpedSinceLastTick) {
+        if (childIndex == children.size() - INDEX_ADJUSTER || jumpedSinceLastTick) {
             return currentNode;
         } else {
-            return children.get(childIndex + 1);
+            return children.get(childIndex + INDEX_ADJUSTER);
         }
     }
 

@@ -27,6 +27,7 @@ public class Game {
 
     private static final String NODE_TO_INSERT_EXISTS_ALREADY_ERROR = "the requested node to insert exists already";
     private static final int ADJUST_INDEX_NUMBER = 1;
+    public static final int INITIAL_COUNT = 0;
     private final List<Ladybug> ladybugs;
     private final List<Ladybug> initialLadybugs;
     private Board board;
@@ -217,7 +218,6 @@ public class Game {
         }
     }
 
-
     private void setBoardLoaded() {
         boardLoaded = true;
     }
@@ -243,7 +243,7 @@ public class Game {
      * @return the count of ladybugs
      */
     public int getLadybugsSize() {
-        int count = 0;
+        int count = INITIAL_COUNT;
         for (Ladybug ladybug : ladybugs) {
             if (ladybug.getIfActive()) {
                 count++;

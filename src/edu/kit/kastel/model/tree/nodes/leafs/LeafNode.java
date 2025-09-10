@@ -53,4 +53,5 @@ public abstract class LeafNode extends Node {
     public void registerSubtree(Map<String, Node> index) {
         index.put(getId(), this);
     }
+
 }

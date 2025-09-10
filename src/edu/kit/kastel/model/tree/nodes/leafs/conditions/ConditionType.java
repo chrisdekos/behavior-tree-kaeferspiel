@@ -1,5 +1,7 @@
 package edu.kit.kastel.model.tree.nodes.leafs.conditions;
 
+import edu.kit.kastel.model.exceptions.TreeParserException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +41,11 @@ public enum ConditionType {
      */
     EXISTS_PATH_BETWEEN("existsPath");
 
+    private static final String EXISTS_PATH_TOO_MANY_COORDINATES = "existsPath can have 1 or 2 coordinates.";
+    private static final int INITIAL_COUNT = 0;
+    private static final int ONE_COORDINATE_FOUND = 1;
+    private static final int TWO_COORDINATES_FOUND = 2;
+
     // matches "existsPath" followed by coordinates
     private static final Pattern EXISTS_PATH_REGEX =
             Pattern.compile("^existsPath(?:\\s+(?<coordinates>.+))?$");
@@ -59,18 +66,25 @@ public enum ConditionType {
      * the condition is {@link #EXISTS_PATH_TO} or {@link #EXISTS_PATH_BETWEEN}.
      * @param representation the full condition text
      * @return the matching condition type, or null if none matches
+     * @throws TreeParserException if representation has more than 2 coordinates.
      */
-    public static ConditionType fromRepresentation(String representation) {
+    public static ConditionType fromRepresentation(String representation) throws TreeParserException {
         Matcher existsPathMatcher = EXISTS_PATH_REGEX.matcher(representation);
         if (existsPathMatcher.matches()) {
             String coordinates = existsPathMatcher.group("coordinates");
             Matcher coordinatesMatcher = COORDINATES_REGEX.matcher(coordinates);
 
-            int count = 0;
+            int count = INITIAL_COUNT;
             while (coordinatesMatcher.find()) {
                 count++;
             }
-            return (count >= 2) ? EXISTS_PATH_BETWEEN : EXISTS_PATH_TO;
+            if (count == ONE_COORDINATE_FOUND) {
+                return EXISTS_PATH_TO;
+            } else if (count == TWO_COORDINATES_FOUND) {
+                return EXISTS_PATH_BETWEEN;
+            } else {
+                throw new TreeParserException(EXISTS_PATH_TOO_MANY_COORDINATES);
+            }
         }
         for (ConditionType type : values()) {
             if (type.representation.equals(representation)) {
