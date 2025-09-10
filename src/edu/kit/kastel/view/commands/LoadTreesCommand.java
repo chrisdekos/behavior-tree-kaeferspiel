@@ -21,7 +21,7 @@ import static edu.kit.kastel.view.Arguments.ERROR_TOO_FEW_ARGUMENTS;
  * Command to load behavior trees into the game.
  * Each provided file is printed verbatim and then parsed.
  * If any error occurs, the game state remains unchanged and the error is returned.
- *
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class LoadTreesCommand implements Command<Game> {
@@ -31,7 +31,6 @@ public class LoadTreesCommand implements Command<Game> {
 
     /**
      * Creates a new LoadTreesCommand.
-     *
      * @param files the list of file paths that contain behavior tree definitions
      */
     public LoadTreesCommand(List<String> files) {
@@ -43,9 +42,8 @@ public class LoadTreesCommand implements Command<Game> {
      * Loads trees from the given files and assigns them to free ladybugs.
      * Requires the board to be loaded first, otherwise fails.
      * Prints each file's contents verbatim.
-     * Parses trees file-by-file; if parsing any file fails, nothing is committed.
+     * Parses trees file-by-file, while parsing, if any file fails, nothing is committed.
      * On success, assigns all parsed trees to the next free ladybugs and marks them active.
-     *
      * @param handle the game instance
      * @return {@link Result#success()} on success; otherwise an error result containing the message
      */

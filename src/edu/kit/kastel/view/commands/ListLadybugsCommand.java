@@ -12,6 +12,7 @@ import java.util.StringJoiner;
  * Command to list all active ladybugs in the current game.
  * Only ladybugs marked as active are included in the output.
  * The result is a whitespace-separated list of ladybug IDs.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class ListLadybugsCommand implements Command<Game> {

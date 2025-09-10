@@ -42,8 +42,6 @@ public abstract class CompositeNode extends Node {
         }
     }
 
-
-
     /**
      * Registers this node and all of its children in the given index.
      * @param index a map from node ids to node instances
@@ -68,8 +66,7 @@ public abstract class CompositeNode extends Node {
      * @return the resulting node status
      */
     protected final NodeStatus runChildrenLinear(TickContext tickContext,
-                                                 NodeStatus breakOn,
-                                                 NodeStatus defaultIfNoBreak) {
+                                                 NodeStatus breakOn, NodeStatus defaultIfNoBreak) {
 
         ensureEntry(tickContext);
         for (Node child : getChildren()) {

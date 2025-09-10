@@ -367,7 +367,6 @@ public final class TreeParser {
         if (!nodeMatcher.matches()) {
             throw new TreeParserException(String.format(INVALID_NODE_TOKEN_ERROR, token));
         }
-
         String id = nodeMatcher.group(REGEX_GROUP_ID);
         String representation = nodeMatcher.group(REGEX_GROUP_REPRESENTATION);
         NodeType type = nodeTypeOf(representation);

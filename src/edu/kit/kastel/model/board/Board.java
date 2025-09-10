@@ -1,6 +1,5 @@
 package edu.kit.kastel.model.board;
 
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;

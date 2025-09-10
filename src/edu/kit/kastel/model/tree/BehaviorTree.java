@@ -80,7 +80,6 @@ public class BehaviorTree {
         }
         List<Node> children = currentNode.getParent().getChildren();
         int childIndex = children.indexOf(currentNode);
-
         if (childIndex == children.size() - INDEX_ADJUSTER || jumpedSinceLastTick) {
             return currentNode;
         } else {

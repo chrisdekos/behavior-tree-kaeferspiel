@@ -14,6 +14,7 @@ import java.util.List;
  * Command to load a board into the game.
  * The board is read from a given input file and then initialized in the game.
  * Any previously loaded board is replaced.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class LoadBoardCommand implements Command<Game> {

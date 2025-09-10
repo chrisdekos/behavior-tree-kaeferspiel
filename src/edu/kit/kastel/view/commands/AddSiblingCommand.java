@@ -9,6 +9,7 @@ import edu.kit.kastel.view.exceptions.InvalidArgumentException;
 
 /**
  * Command to add a new sibling node in a ladybug's behavior tree.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class AddSiblingCommand implements Command<Game> {
@@ -18,7 +19,7 @@ public class AddSiblingCommand implements Command<Game> {
     private final String newNode;
 
     /**
-     * Creates a new {@code AddSiblingCommand}.
+     * Creates a new AddSiblingCommand.
      * @param ladybugID       the id of the ladybug whose tree will be modified
      * @param existingNodeID  the id of the node after which the new node is inserted
      * @param newNode         the textual representation of the new node

@@ -1,9 +1,8 @@
 package edu.kit.kastel.model.board;
 
 /**
- * Represents the four directions that can be used to move
- * across the board. Each direction has a character symbol and
- * row/column deltas that describe the movement.
+ * Represents the four directions that can be used to move across the board.
+ * Each direction has a character symbol and row/column deltas that describe the movement.
  * @author ujsap
  */
 public enum Direction {

@@ -16,6 +16,7 @@ import java.util.StringJoiner;
 /**
  * Command to perform the next action for all active ladybugs.
  * It prints the resulting trace entries and the updated board.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class NextActionCommand implements Command<Game> {
@@ -40,7 +41,6 @@ public class NextActionCommand implements Command<Game> {
                 ladybugsToTick.add(ladybug);
             }
         }
-
         StringJoiner joiner = new StringJoiner(System.lineSeparator());
         for (Ladybug ladybug : ladybugsToTick) {
             for (TraceEntry traceEntry : handle.singleNextAction(ladybug.getId()).getEntries()) {

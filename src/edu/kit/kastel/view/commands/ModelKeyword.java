@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Keywords for all model-related commands in the {@link Game}.
  * Each keyword maps user input to a corresponding {@link Command}.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public enum ModelKeyword implements Keyword<Game> {

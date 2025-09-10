@@ -11,6 +11,7 @@ import static edu.kit.kastel.view.util.PrintHelpers.toViewPosition;
 
 /**
  * Command to print the current position of a specific ladybug.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class PrintPositionCommand implements Command<Game> {

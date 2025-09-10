@@ -8,6 +8,7 @@ import edu.kit.kastel.view.Result;
 
 /**
  * Command to return the id of the head node of a specific ladybug's behavior tree.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class HeadCommand implements Command<Game> {

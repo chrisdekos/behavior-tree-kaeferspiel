@@ -8,7 +8,7 @@ import edu.kit.kastel.model.tree.nodes.leafs.LeafNode;
 
 /**
  * Base class for all condition nodes in a behavior tree.
- * A condition node checks a specific state in the environment.
+ * A condition node checks a specific state on the board.
  * Subclasses implement the concrete check in {@link #executeCondition(TickContext)}.
  * @author ujasp
  */

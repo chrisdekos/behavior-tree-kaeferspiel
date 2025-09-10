@@ -11,8 +11,7 @@ import java.util.List;
 
 /**
  * Parses textual representations of a board into Board objects.
- * A board is described line by line, with each character representing
- * either a CellType or a Ladybug.
+ * A board is described line by line, with each character representing either a CellType or a Ladybug.
  * When a ladybug symbol is encountered, a new Ladybug instance is created and added to the given list.
  * @author ujsap
  */

@@ -8,7 +8,7 @@ import edu.kit.kastel.view.Result;
 
 /**
  * Command to jump a ladybug's behavior tree current node to a specific node.
- *
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class JumpToCommand implements Command<Game> {
@@ -17,7 +17,6 @@ public class JumpToCommand implements Command<Game> {
 
     /**
      * Creates a new JumpToCommand.
-     *
      * @param ladybugID the id of the ladybug whose tree should jump
      * @param nodeID    the target node id to jump to
      */
@@ -28,7 +27,6 @@ public class JumpToCommand implements Command<Game> {
 
     /**
      * Executes the command: jumps the specified ladybug's behavior tree to the given node.
-     *
      * @param handle the game instance
      * @return a {@link Result} indicating success,or an error if the action cannot be performed.
      */

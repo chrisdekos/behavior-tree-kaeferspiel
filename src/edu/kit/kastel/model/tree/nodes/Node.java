@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public abstract class Node {
     private static final int NEXT_INDEX_NUMBER = 1;
+
     private final List<Node> children;
     private final String id;
     private final NodeType nodeType;
@@ -89,7 +90,6 @@ public abstract class Node {
                 new TraceEntry(tickContext.getLadybug().getId(), id, getSpecificType(), TraceEvent.ENTRY)
         );
     }
-
 
     /**
      * Logs an exit event for this node and sets its status to the given result.

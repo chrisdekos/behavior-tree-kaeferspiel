@@ -6,6 +6,7 @@ import edu.kit.kastel.view.UserInterface;
 
 /**
  * Command to quit the application by stopping the {@link UserInterface}.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class QuitCommand implements Command<UserInterface> {

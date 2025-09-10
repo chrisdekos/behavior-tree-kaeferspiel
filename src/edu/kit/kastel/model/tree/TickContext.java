@@ -12,7 +12,6 @@ import java.util.Set;
  * @author ujsap
  */
 public class TickContext {
-
     private final Board board;
     private final Ladybug ladybug;
     private final Trace trace;

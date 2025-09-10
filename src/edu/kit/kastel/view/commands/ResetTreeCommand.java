@@ -8,6 +8,7 @@ import edu.kit.kastel.view.Result;
 
 /**
  * Command to reset the behavior tree of a specific ladybug.
+ * @author Programmieren-Team
  * @author ujsap
  */
 public class ResetTreeCommand implements Command<Game> {
