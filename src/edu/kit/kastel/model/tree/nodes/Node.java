@@ -4,6 +4,7 @@ import edu.kit.kastel.model.tree.TickContext;
 import edu.kit.kastel.model.tree.TraceEntry;
 import edu.kit.kastel.model.tree.TraceEvent;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public abstract class Node {
         this.id = id;
         this.nodeType = nodeType;
         this.parent = parent;
-        children = Collections.emptyList();
+        children = new ArrayList<>();
         this.nodeStatus = NodeStatus.ENTRY;
     }
 
@@ -122,7 +123,7 @@ public abstract class Node {
      * @param child the child node to find the index from
      * @return the index of the given child
      */
-    public final int indexOfChild(Node child) {
+    protected final int indexOfChild(Node child) {
         return this.children.indexOf(child);
     }
 
@@ -131,7 +132,7 @@ public abstract class Node {
      * @return the list of children
      */
     public final List<Node> getChildren() {
-        return this.children;
+        return Collections.unmodifiableList(this.children);
     }
 
     /**
