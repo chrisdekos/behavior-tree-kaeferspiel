@@ -16,6 +16,7 @@ public final class TraceEntriesPrinter {
     private static final String COORDINATES_SPLITTER = ",";
     private static final int COLUMN_INDEX = 0;
     private static final int ROW_INDEX = 1;
+    private static final int TYPE_INDEX = 0;
 
     private TraceEntriesPrinter() {
         // Utility class
@@ -40,7 +41,7 @@ public final class TraceEntriesPrinter {
 
     private static String formatWithCoordinates(TraceEntry entry) {
         String[] parts = entry.nodeType().split(COORDINATES_SEPARATOR);
-        StringBuilder newNodeType = new StringBuilder(parts[0]);
+        StringBuilder newNodeType = new StringBuilder(parts[TYPE_INDEX]);
 
         for (int i = 1; i < parts.length; i++) {
             String[] coordinates = parts[i].split(COORDINATES_SPLITTER);

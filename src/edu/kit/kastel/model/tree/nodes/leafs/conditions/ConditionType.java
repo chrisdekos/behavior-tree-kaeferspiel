@@ -45,6 +45,7 @@ public enum ConditionType {
     private static final int INITIAL_COUNT = 0;
     private static final int ONE_COORDINATE_FOUND = 1;
     private static final int TWO_COORDINATES_FOUND = 2;
+    private static final String REGEX_GROUP_COORDINATES = "coordinates";
 
     // matches "existsPath" followed by coordinates
     private static final Pattern EXISTS_PATH_REGEX =
@@ -53,7 +54,6 @@ public enum ConditionType {
     // matches a coordinate pair "
     private static final Pattern COORDINATES_REGEX =
             Pattern.compile("-?\\d+\\s*,\\s*-?\\d+");
-
     private final String representation;
 
     ConditionType(String representation) {
@@ -71,7 +71,7 @@ public enum ConditionType {
     public static ConditionType fromRepresentation(String representation) throws TreeParserException {
         Matcher existsPathMatcher = EXISTS_PATH_REGEX.matcher(representation);
         if (existsPathMatcher.matches()) {
-            String coordinates = existsPathMatcher.group("coordinates");
+            String coordinates = existsPathMatcher.group(REGEX_GROUP_COORDINATES);
             Matcher coordinatesMatcher = COORDINATES_REGEX.matcher(coordinates);
 
             int count = INITIAL_COUNT;

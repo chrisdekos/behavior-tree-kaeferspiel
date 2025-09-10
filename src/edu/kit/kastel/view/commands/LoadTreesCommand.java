@@ -26,6 +26,7 @@ import static edu.kit.kastel.view.Arguments.ERROR_TOO_FEW_ARGUMENTS;
  */
 public class LoadTreesCommand implements Command<Game> {
     private static final String MORE_TREES_THAN_LADYBUGS_ERROR = "there can not be more trees than ladybugs";
+    private static final int INITIAL_NUMBER_OF_ASSIGNED_LADYBUGS = 0;
     private final List<String> files;
 
     /**
@@ -51,7 +52,7 @@ public class LoadTreesCommand implements Command<Game> {
     @Override
     public Result execute(Game handle) {
         List<BehaviorTree> allTrees = new ArrayList<>();
-        int assigned = 0;
+        int assigned = INITIAL_NUMBER_OF_ASSIGNED_LADYBUGS;
 
         if (files.size() > handle.getInitialLadybugs().size()) {
             return Result.error(new InvalidArgumentException(MORE_TREES_THAN_LADYBUGS_ERROR).getMessage());

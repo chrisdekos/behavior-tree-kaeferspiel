@@ -26,6 +26,7 @@ public final class PrintHelpers {
     private static final String VIEW_COORDINATES_FORMAT = "%d,%d";
     private static final String VIEW_POSITION_FORMAT = "(%d, %d)";
     private static final int VIEW_INDEX_SHIFT = 1;
+    private static final int EXTRA_LENGTH_FOR_BORDERS = 2;
 
 
     private PrintHelpers() {
@@ -82,7 +83,7 @@ public final class PrintHelpers {
             ladybugByPosition.put(ladybug.getPosition(), ladybug.getDirection().toChar());
         }
 
-        List<String> outputBoard = new ArrayList<>(rows + 2);
+        List<String> outputBoard = new ArrayList<>(rows + EXTRA_LENGTH_FOR_BORDERS);
         String border = THREE_PARTS_UPPER_BORDER_FORMAT.formatted(
                 BORDER_CORNER, String.valueOf(BORDER_HORIZONTAL).repeat(columns), BORDER_CORNER);
         outputBoard.add(border);
