@@ -14,8 +14,8 @@ import edu.kit.kastel.model.tree.nodes.leafs.conditions.ConditionType;
 public final class TraceEntriesPrinter {
     private static final String COORDINATES_SEPARATOR = " ";
     private static final String COORDINATES_SPLITTER = ",";
-    private static final int COLUMN_INDEX = 1;
-    private static final int ROW_INDEX = 2;
+    private static final int COLUMN_INDEX = 0;
+    private static final int ROW_INDEX = 1;
 
     private TraceEntriesPrinter() {
         // Utility class
