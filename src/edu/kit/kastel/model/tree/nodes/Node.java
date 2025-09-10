@@ -23,6 +23,7 @@ public abstract class Node {
     private Node parent;
     private NodeStatus nodeStatus;
 
+
     /**
      * Creates a new node.
      * @param id       the node id
