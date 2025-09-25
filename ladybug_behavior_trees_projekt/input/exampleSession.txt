@@ -1,0 +1,17 @@
+load board ./input/boards/exampleBoard.txt
+load trees ./input/trees/firstExampleTree.txt ./input/trees/secondExampleTree.txt
+list ladybugs
+print position 1
+next action
+next action
+next action
+next action
+next action
+next action
+next action
+next action
+print position 1
+head 1
+add sibling 1 J K[turnLeft]
+next action
+quit
